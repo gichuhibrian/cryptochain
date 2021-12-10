@@ -21,12 +21,12 @@ class Blockchain {
         }
         for (let i=1; i<chain.length; i++) {
             const block = chain[i];
-            const { timestamp, lastHash, hash, data } = block
+            const { timestamp, lastHash, hash, difficulty, nonce, data } = block
             const actualHash = chain[i-1].hash
 
             if(lastHash !== actualHash) return false
 
-            const validatedHash = cryptoHash(timestamp, lastHash, data);
+            const validatedHash = cryptoHash(timestamp, lastHash, data, nonce, difficulty);
             if(hash !== validatedHash) return false
         }
         return true
